@@ -1,0 +1,58 @@
+group 'com.github.zxkane'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.2.RELEASE'
+    }
+    repositories {
+        // NOTE: You should declare only repositories that you need here
+        mavenLocal()
+        maven {
+            name "spring repo"
+            url "http://repo.spring.io/release"
+        }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+    }
+}
+
+repositories {
+    // NOTE: You should declare only repositories that you need here
+    mavenLocal()
+    maven {
+        name "spring repo"
+        url "http://repo.spring.io/release"
+    }
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.projectlombok:lombok:1.16.10",
+            "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-data-redis",
+            "org.springframework.boot:spring-boot-starter-security",
+            'org.springframework.session:spring-session:1.2.2.RELEASE',
+            'org.springframework.hateoas:spring-hateoas:0.21.0.RELEASE'
+
+    testCompile "org.springframework.boot:spring-boot-starter-test",
+            "org.springframework.security:spring-security-test",
+            'org.assertj:assertj-core:3.5.1'
+}
